@@ -9,4 +9,4 @@ services:
     ports:
       - ${SQLITE_PORT}:9000
     volumes:
-      - ./db/:/root/db/
+      - .:/usr/app
