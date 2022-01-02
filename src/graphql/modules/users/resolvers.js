@@ -12,12 +12,18 @@ export default {
     createUser: async (_, { data }) => await User.create(data),
     updateUser: async (_, { id, data }) => {
       const user = await User.findOne({ where: { id } });
-      const dataKeys = Object.keys(data);
+      // const dataKeys = Object.keys(data);
 
-      user[dataKeys[0]] = data[dataKeys[0]] && data[dataKeys[0]];
-      user[dataKeys[1]] = data[dataKeys[1]] && data[dataKeys[1]];
-      user[dataKeys[2]] = data[dataKeys[2]] && data[dataKeys[2]];
-      user[dataKeys[3]] = data[dataKeys[3]] && data[dataKeys[3]];
+      user.firstName = data.firstName;
+      user.lastName = data.lastName;
+      user.email = data.email;
+      user.active = data.active;
+
+      // user[dataKeys[0]] = data[dataKeys[0]] && data[dataKeys[0]];
+      // user[dataKeys[1]] = data[dataKeys[1]] && data[dataKeys[1]];
+      // user[dataKeys[2]] = data[dataKeys[2]] && data[dataKeys[2]];
+      // user[dataKeys[3]] = data[dataKeys[3]] && data[dataKeys[3]];
+
       await user.save();
       await user.reload();
       return user;
